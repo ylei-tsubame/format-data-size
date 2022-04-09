@@ -1,11 +1,3 @@
-const helloWorld = () => {
-  const outputString = 'Hello World!';
+import { formatDataSize } from './lib';
 
-  console.log(outputString);
-
-  return outputString;
-};
-
-helloWorld();
-
-export { helloWorld };
+export { formatDataSize };

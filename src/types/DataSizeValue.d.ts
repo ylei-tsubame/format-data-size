@@ -1,0 +1,1 @@
+type DataSizeValue = bigint | number;
