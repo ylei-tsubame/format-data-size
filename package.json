@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.js",
     "build:dev": "tsc --project tsconfig.dev.json",
+    "build:types": "tsc --project tsconfig.types.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

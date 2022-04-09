@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "outDir": "dev",
+    "sourceMap": true
+  },
+  "extends": "./tsconfig.json"
+}
