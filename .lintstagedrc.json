@@ -1,0 +1,4 @@
+{
+  "*.{js,ts}": "npm run eslint:base -- --fix",
+  "*": "npm run prettier:base -- --write"
+}

@@ -8,9 +8,12 @@
     "build:dev": "tsc --project tsconfig.dev.json",
     "build:types": "tsc --project tsconfig.types.json",
     "eslint:base": "eslint --ext js,ts --max-warnings 0",
-    "lint": "npm run eslint:base -- . && npm run prettier:locked -- --check",
-    "lint:fix": "npm run eslint:base -- --fix . && npm run prettier:locked -- --write",
-    "prettier:locked": "prettier --ignore-unknown '**/*'",
+    "eslint:all": "npm run eslint:base -- .",
+    "lint": "npm run eslint:all && npm run prettier:all -- --check",
+    "lint:fix": "npm run eslint:all -- --fix && npm run prettier:all -- --write",
+    "prepare": "cd $( git rev-parse --show-toplevel ) && husky install",
+    "prettier:base": "prettier --ignore-unknown",
+    "prettier:all": "npm run prettier:base -- '**/*'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
