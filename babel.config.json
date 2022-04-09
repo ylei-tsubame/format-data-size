@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": {
+      "presets": [
+        ["@babel/preset-env", { "modules": false }],
+        "@babel/preset-typescript"
+      ]
+    },
+    "nodejs": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "modules": false,
+            "targets": { "node": "10.0" }
+          }
+        ],
+        "@babel/preset-typescript"
+      ]
+    }
+  }
+}
