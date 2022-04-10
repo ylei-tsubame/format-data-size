@@ -1,7 +1,4 @@
-type DataSize =
-  | {
-      value: string;
-      unit: DataSizeUnit;
-    }
-  | [string, DataSizeUnit]
-  | string;
+type DataSize = {
+  value: string;
+  unit: DataSizeUnit;
+};

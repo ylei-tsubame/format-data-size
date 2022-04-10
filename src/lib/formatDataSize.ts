@@ -4,13 +4,7 @@ import { adjustPrecision, convert, format } from '.';
 
 export const formatDataSize: FormatDataSizeFunction = (
   value: DataSizeValue | string,
-  {
-    fromUnit = 'B',
-    locale,
-    precision = 2,
-    returnOnFailure,
-    toUnit,
-  }: FormatDataSizeOptions = {},
+  { fromUnit = 'B', locale, precision = 2, toUnit }: FormatDataSizeOptions = {},
 ) => {
   console.log(`value=${value}, fromUnit=${fromUnit}, toUnit=${toUnit}`);
 
@@ -26,7 +20,7 @@ export const formatDataSize: FormatDataSizeFunction = (
   try {
     resultValue = BigInt(valueParts.join(''));
   } catch (error) {
-    return returnOnFailure;
+    return undefined;
   }
 
   [resultValue] = convert(resultValue, fromUnit, { isReverse: true });
