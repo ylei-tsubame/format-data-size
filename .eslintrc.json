@@ -1,5 +1,11 @@
 {
   "extends": ["eslint:recommended", "prettier"],
+  "overrides": [
+    {
+      "env": { "node": true },
+      "files": ["**/*.config.js"]
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": 2015,
     "sourceType": "module"

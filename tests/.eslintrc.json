@@ -1,0 +1,5 @@
+{
+  "env": { "jest": true },
+  "extends": ["../.eslintrc.json", "plugin:jest/all"],
+  "plugins": ["jest"]
+}

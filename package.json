@@ -14,7 +14,7 @@
     "prepare": "cd $( git rev-parse --show-toplevel ) && husky install",
     "prettier:base": "prettier --ignore-unknown",
     "prettier:all": "npm run prettier:base -- '**/*'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "BABEL_ENV=development jest"
   },
   "repository": {
     "type": "git",
@@ -31,12 +31,15 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@rollup/plugin-babel": "^5.3.1",
+    "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.1.4",
     "husky": "^7.0.4",
+    "jest": "^27.5.1",
     "lint-staged": "^12.3.7",
     "prettier": "^2.6.2",
     "rollup": "^2.70.1",
