@@ -10,8 +10,7 @@
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "strict": true,
-    "target": "esnext",
-    "typeRoots": ["src/types"]
+    "target": "esnext"
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*.ts"]
