@@ -33,5 +33,7 @@ export const createConversionTable: CreateConversionTableFunction = ({
 
   existingTable[`${bit}-${byte}`] = bitsInByte;
 
+  console.dir(existingTable, { depth: null });
+
   return existingTable;
 };

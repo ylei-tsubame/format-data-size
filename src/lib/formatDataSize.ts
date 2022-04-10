@@ -43,7 +43,9 @@ export const formatDataSize: FormatDataSizeFunction = (
 
   console.log(`resultUnit=${resultUnit}:${typeof resultUnit}`);
 
-  [resultValue, resultFraction] = convert(resultValue, resultUnit);
+  [resultValue, resultFraction] = convert(resultValue, resultUnit, {
+    precision: typeof precision === 'number' ? precision : precision?.max,
+  });
 
   console.log(`resultValue=${resultValue}:${typeof resultValue}`);
   console.log(`resultFraction=${resultFraction}:${typeof resultFraction}`);

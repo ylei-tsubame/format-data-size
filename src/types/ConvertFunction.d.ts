@@ -1,4 +1,7 @@
-type ConvertOptions = { isReverse?: boolean };
+type ConvertOptions = {
+  isReverse?: boolean;
+  precision?: number;
+};
 
 type ConvertFunction = (
   value: bigint,
