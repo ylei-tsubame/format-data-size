@@ -1,8 +1,8 @@
-import { BIGINT_ZERO, UNITS } from '../consts';
+import { UNITS } from '../consts';
 
 import { adjustPrecision, convert, format } from '.';
 
-const formatDataSize: FormatDataSizeFunction = (
+export const formatDataSize: FormatDataSizeFunction = (
   value: DataSizeValue | string,
   {
     fromUnit = 'B',
@@ -20,7 +20,7 @@ const formatDataSize: FormatDataSizeFunction = (
   console.log(`valueParts=${valueParts}, valuePrecision=${valuePrecision}`);
 
   let resultValue: bigint;
-  let resultFraction: bigint = BIGINT_ZERO;
+  let resultFraction = 0n;
   let resultUnit: DataSizeUnit;
 
   try {
@@ -66,5 +66,3 @@ const formatDataSize: FormatDataSizeFunction = (
     unit: resultUnit,
   };
 };
-
-export default formatDataSize;

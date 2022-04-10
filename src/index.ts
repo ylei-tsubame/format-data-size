@@ -1,3 +1,1 @@
-import { formatDataSize } from './lib';
-
-export { formatDataSize };
+export { formatDataSize } from './lib';

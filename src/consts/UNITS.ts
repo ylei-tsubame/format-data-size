@@ -1,4 +1,4 @@
-const UNITS: DataSizeUnit[] = [
+export const UNITS: DataSizeUnit[] = [
   'kB',
   'MB',
   'GB',
@@ -34,5 +34,3 @@ const UNITS: DataSizeUnit[] = [
   'B',
   'b',
 ];
-
-export default UNITS;

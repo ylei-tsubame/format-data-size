@@ -1,6 +1,7 @@
 type CreateConversionTableOptions = {
-  units?: DataSizeUnit[];
   existingTable?: ConversionTable;
+  unitSectionLength?: number;
+  units?: DataSizeUnit[];
 };
 
 type CreateConversionTableFunction = (

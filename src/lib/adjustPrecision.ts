@@ -1,6 +1,6 @@
 import { round } from '.';
 
-const adjustPrecision: AdjustPrecisionFunction = (
+export const adjustPrecision: AdjustPrecisionFunction = (
   stringInt: string,
   postDecimalIndex: number,
   precision: PrecisionControl,
@@ -28,5 +28,3 @@ const adjustPrecision: AdjustPrecisionFunction = (
 
   return result;
 };
-
-export default adjustPrecision;

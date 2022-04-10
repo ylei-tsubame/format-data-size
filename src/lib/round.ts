@@ -1,4 +1,4 @@
-const round: RoundFunction = (
+export const round: RoundFunction = (
   stringInt: string,
   postDecimalIndex: number,
   { precision = 1 }: RoundOptions = {},
@@ -21,5 +21,3 @@ const round: RoundFunction = (
 
   return `${stringInt.substring(0, lastDigitIndex)}${lastDigit}`;
 };
-
-export default round;

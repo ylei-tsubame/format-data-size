@@ -1,4 +1,4 @@
-const format: FormatFunction = (
+export const format: FormatFunction = (
   stringInt: string,
   postDecimalIndex: number,
   { bigintFormatOptions, numberFormatOptions, locale }: FormatOptions = {},
@@ -29,5 +29,3 @@ const format: FormatFunction = (
 
   return result;
 };
-
-export default format;

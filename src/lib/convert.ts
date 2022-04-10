@@ -1,28 +1,26 @@
-import { BIGINT_ZERO, CONVERSION_TABLE } from '../consts';
+import { conversionTable } from '../singletons';
 
-const convert: ConvertFunction = (
+export const convert: ConvertFunction = (
   value: bigint,
   unit: DataSizeUnit,
   { isReverse }: ConvertOptions = {},
 ) => {
-  const unchangedValue: [bigint, bigint] = [value, BIGINT_ZERO];
+  const unchangedValue: [bigint, bigint] = [value, 0n];
 
   if (unit === 'b') {
     return unchangedValue;
   }
 
   const convertKey = `b-${unit}`;
-  const convertMultiplier: bigint | undefined = CONVERSION_TABLE[convertKey];
+  const convertMultiplier: bigint | undefined = conversionTable[convertKey];
 
   if (!convertMultiplier) {
     return unchangedValue;
   }
 
   if (isReverse) {
-    return [value * CONVERSION_TABLE[convertKey], BIGINT_ZERO];
+    return [value * conversionTable[convertKey], 0n];
   }
 
   return [value / convertMultiplier, value % convertMultiplier];
 };
-
-export default convert;
