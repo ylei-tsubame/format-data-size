@@ -2,5 +2,13 @@
   "endOfLine": "lf",
   "singleQuote": true,
   "tabWidth": 2,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "tests/**/*.js",
+      "options": {
+        "trailingComma": "es5"
+      }
+    }
+  ]
 }
