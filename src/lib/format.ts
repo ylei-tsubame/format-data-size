@@ -21,7 +21,7 @@ export const format: FormatFunction = (
     decimal = (0.1).toLocaleString(localeToPass, numberFormatOptions).charAt(1);
   }
 
-  let result = preDecimal;
+  let result: string = preDecimal === '' ? '0' : preDecimal;
 
   if (postDecimal.length > 0) {
     result += `${decimal}${postDecimal}`;
