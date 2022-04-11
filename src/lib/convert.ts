@@ -5,7 +5,7 @@ export const convert: ConvertFunction = (
   unit: DataSizeUnit,
   { isReverse, precision: maxDividePrecision = 6 }: ConvertOptions = {},
 ) => {
-  const unchangedValue: [bigint, bigint] = [value, 0n];
+  const unchangedValue: [bigint, string] = [value, ''];
 
   if (unit === 'b') {
     return unchangedValue;
@@ -21,12 +21,17 @@ export const convert: ConvertFunction = (
   }
 
   if (isReverse) {
-    return [value * conversionTable[convertKey], 0n];
+    return [value * conversionTable[convertKey], ''];
   }
 
   // Increase precision to ensure correct rounding.
   const shiftMultiplier = BigInt('1'.padEnd(maxDividePrecision + 2, '0'));
   const divided = (value * shiftMultiplier) / convertMultiplier;
 
-  return [divided / shiftMultiplier, divided % shiftMultiplier];
+  console.log(`shiftMultiplier=${shiftMultiplier},divided=${divided}`);
+
+  return [
+    divided / shiftMultiplier,
+    `${divided % shiftMultiplier}`.padStart(maxDividePrecision + 1, '0'),
+  ];
 };

@@ -7,4 +7,4 @@ type ConvertFunction = (
   value: bigint,
   unit: DataSizeUnit,
   options?: ConvertOptions,
-) => [bigint, bigint];
+) => [bigint, string];
