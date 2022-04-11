@@ -1,23 +1,46 @@
+import { charToInt } from '.';
+
 export const round: RoundFunction = (
   stringInt: string,
-  postDecimalIndex: number,
-  { precision = 1 }: RoundOptions = {},
+  fractionIndex: number,
+  { precision = 0 }: RoundOptions = {},
 ) => {
-  const precisionIndex = precision - 1;
-  const maxLastDigitIndex = stringInt.length - 2;
-  const preDecimalIndex = postDecimalIndex - 1;
+  const lastDigitIndex = fractionIndex + precision;
+  const stringValue = stringInt.padEnd(
+    Math.max(lastDigitIndex, stringInt.length - 1) + 1,
+    '0',
+  );
 
-  let lastDigitIndex = postDecimalIndex + precisionIndex;
+  const lastDigit = charToInt(stringValue, lastDigitIndex);
 
-  if (lastDigitIndex > maxLastDigitIndex) {
-    lastDigitIndex = maxLastDigitIndex;
-  } else if (lastDigitIndex < preDecimalIndex) {
-    lastDigitIndex = preDecimalIndex;
+  let carryOver = lastDigit > 4 ? 1 : 0;
+  let digitIndex = lastDigitIndex - 1;
+  let roundedPart = '';
+  let newFractionIndex = fractionIndex;
+
+  while (carryOver === 1) {
+    const added = charToInt(stringValue, digitIndex) + carryOver;
+
+    carryOver = Math.floor(added / 10);
+    roundedPart = `${added % 10}${roundedPart}`;
+    digitIndex -= 1;
   }
 
-  const lastDigit =
-    parseInt(stringInt.charAt(lastDigitIndex), 10) +
-    (parseInt(stringInt.charAt(lastDigitIndex + 1), 10) > 4 ? 1 : 0);
+  const unchangedPart = stringValue.substring(0, digitIndex + 1);
 
-  return `${stringInt.substring(0, lastDigitIndex)}${lastDigit}`;
+  let newStringInt = `${unchangedPart}${roundedPart}`;
+
+  if (newStringInt === '') {
+    newStringInt = '0';
+    newFractionIndex = 1;
+  }
+
+  if (digitIndex < -1) {
+    newFractionIndex += 1;
+  }
+
+  return {
+    stringInt: newStringInt,
+    fractionIndex: newFractionIndex,
+  };
 };

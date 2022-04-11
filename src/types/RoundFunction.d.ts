@@ -2,6 +2,9 @@ type RoundOptions = { precision?: number };
 
 type RoundFunction = (
   stringInt: string,
-  postDecimalIndex: number,
+  fractionIndex: number,
   options?: RoundOptions,
-) => string;
+) => {
+  stringInt: string;
+  fractionIndex: number;
+};

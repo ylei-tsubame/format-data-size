@@ -1,4 +1,5 @@
 export * from './adjustPrecision';
+export * from './charToInt';
 export * from './createConversionTable';
 export * from './format';
 export * from './formatDataSize';
