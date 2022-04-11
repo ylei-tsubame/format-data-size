@@ -2,12 +2,13 @@ import { round } from '.';
 
 export const adjustPrecision: AdjustPrecisionFunction = (
   stringInt: string,
-  postDecimalIndex: number,
+  fractionIndex: number,
   precision: PrecisionControl,
 ) => {
-  const postDecimalLength = stringInt.length - postDecimalIndex;
+  const fractionLength = stringInt.length - fractionIndex;
 
-  let result: string = stringInt;
+  let newStringInt: string = stringInt;
+  let newFractionIndex: number = fractionIndex;
   let max: number;
   let min: number;
 
@@ -15,16 +16,23 @@ export const adjustPrecision: AdjustPrecisionFunction = (
     max = precision;
     min = precision;
   } else {
-    ({ max = postDecimalLength, min = 0 } = precision);
+    ({ max = fractionLength, min = 0 } = precision);
   }
 
-  if (postDecimalLength < min) {
-    result = stringInt.padEnd(postDecimalIndex + min, '0');
-  } else if (postDecimalLength > max) {
-    result = round(stringInt, postDecimalIndex, {
-      precision: max,
-    });
+  if (fractionLength < min) {
+    newStringInt = stringInt.padEnd(fractionIndex + min, '0');
+  } else if (fractionLength > max) {
+    ({ stringInt: newStringInt, fractionIndex: newFractionIndex } = round(
+      stringInt,
+      fractionIndex,
+      {
+        precision: max,
+      },
+    ));
   }
 
-  return result;
+  return {
+    stringInt: newStringInt,
+    fractionIndex: newFractionIndex,
+  };
 };

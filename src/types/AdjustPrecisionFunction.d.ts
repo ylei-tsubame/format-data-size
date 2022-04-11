@@ -1,5 +1,8 @@
 type AdjustPrecisionFunction = (
   stringInt: string,
-  postDecimalIndex: number,
+  fractionIndex: number,
   precision: PrecisionControl,
-) => string;
+) => {
+  stringInt: string;
+  fractionIndex: number;
+};
