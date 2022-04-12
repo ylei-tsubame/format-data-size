@@ -32,8 +32,10 @@
       "node": {
         "import": "./dist/nodejs-esm/index.mjs",
         "require": "./dist/nodejs-cjs/index.cjs"
-      }
-    }
+      },
+      "default": "./dist/browser-esm/index.js"
+    },
+    "./umd": "./dist/browser-umd/index.js"
   },
   "files": [
     "dist",
