@@ -21,6 +21,10 @@ export const formatDataSize: FormatDataSizeFunction = (
   let resultValue: bigint;
   let resultFraction = '';
 
+  if (valueString === '') {
+    return undefined;
+  }
+
   try {
     resultValue = BigInt(valueString);
   } catch (error) {
