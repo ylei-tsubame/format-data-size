@@ -2,12 +2,14 @@
   "name": "format-data-size",
   "version": "0.1.0",
   "description": "NPM module for converting and formatting data sizes.",
-  "main": "index.js",
+  "main": "./dist/nodejs-cjs/index.js",
   "scripts": {
-    "build": "rollup --config rollup.config.js",
+    "build": "rollup --config rollup.config.mjs",
     "build:dev": "tsc --project tsconfig.dev.json",
     "build:types": "tsc --project tsconfig.types.json",
-    "eslint:base": "eslint --ext js,ts --max-warnings 0",
+    "config:babel": "node ./scripts/printConfig.js './babel.config.js'",
+    "config:rollup": "node ./scripts/printConfig.js './rollup.config.mjs'",
+    "eslint:base": "eslint --ext cjs,js,mjs,ts --max-warnings 0",
     "eslint:all": "npm run eslint:base -- .",
     "lint": "npm run eslint:all && npm run prettier:all -- --check",
     "lint:fix": "npm run eslint:all -- --fix && npm run prettier:all -- --write",
@@ -26,6 +28,19 @@
     "url": "https://github.com/ylei-tsubame/format-data-size/issues"
   },
   "homepage": "https://github.com/ylei-tsubame/format-data-size#readme",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "node": {
+        "import": "./dist/nodejs-esm/index.js",
+        "require": "./dist/nodejs-cjs/index.js"
+      },
+      "default": "./dist/nodejs-cjs/index.js"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",

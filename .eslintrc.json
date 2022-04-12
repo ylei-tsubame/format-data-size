@@ -3,7 +3,7 @@
   "overrides": [
     {
       "env": { "node": true },
-      "files": ["**/*.config.js"]
+      "files": ["**/*.config.{cjs,js,mjs}"]
     }
   ],
   "parserOptions": {
