@@ -31,14 +31,17 @@ export const selectDataSizeUnit: SelectDataSizeUnitFunction = (
   }
 
   const integralLength = stringInt.length - precision;
+  const unitLevel = fromUnitIndex % unitSectionLength;
+  const levelOffset = Math.floor((integralLength - precision) / 3);
 
   console.log(
-    `stringInt=${stringInt},integralLength=${integralLength},precision=${precision}`,
+    `stringInt=${stringInt},integralLength=${integralLength},precision=${precision},unitLevel=${unitLevel},levelOffset=${levelOffset}`,
   );
 
-  const indexInSection =
-    (fromUnitIndex % unitSectionLength) +
-    Math.floor((integralLength - precision) / 3);
+  const indexInSection = Math.max(
+    0,
+    Math.min(unitLevel + levelOffset, unitSectionLength - 1),
+  );
 
   return units[toUnitSectionIndex * unitSectionLength + indexInSection];
 };
