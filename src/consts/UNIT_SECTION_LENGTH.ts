@@ -1,1 +1,1 @@
-export const UNIT_SECTION_LENGTH = 9;
+export const UNIT_SECTION_LENGTH: Readonly<number> = 9;
