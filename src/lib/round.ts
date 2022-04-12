@@ -1,3 +1,5 @@
+import { RoundFunction, RoundOptions } from '../types';
+
 import { charToInt } from '.';
 
 export const round: RoundFunction = (

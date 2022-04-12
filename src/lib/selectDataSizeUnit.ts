@@ -1,3 +1,10 @@
+import {
+  DataSizeUnit,
+  DataSizeUnitSection,
+  SelectDataSizeUnitFunction,
+  SelectDataSizeUnitOptions,
+} from '../types';
+
 import { UNITS, UNIT_SECTIONS, UNIT_SECTION_LENGTH } from '../consts';
 
 export const selectDataSizeUnit: SelectDataSizeUnitFunction = (
@@ -22,7 +29,7 @@ export const selectDataSizeUnit: SelectDataSizeUnitFunction = (
     return newToUnit;
   }
 
-  let toUnitSectionIndex = unitSections.indexOf(toUnit as UnitSection);
+  let toUnitSectionIndex = unitSections.indexOf(toUnit as DataSizeUnitSection);
 
   if (toUnitSectionIndex < 0) {
     toUnitSectionIndex = /B$/.test(fromUnit)

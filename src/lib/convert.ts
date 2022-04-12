@@ -1,3 +1,5 @@
+import { ConvertFunction, ConvertOptions, DataSizeUnit } from '../types';
+
 import { conversionTable } from '../singletons';
 
 export const convert: ConvertFunction = (

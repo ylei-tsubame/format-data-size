@@ -1,3 +1,5 @@
+import { AdjustPrecisionFunction, PrecisionControl } from '../types';
+
 import { round } from '.';
 
 export const adjustPrecision: AdjustPrecisionFunction = (

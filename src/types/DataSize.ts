@@ -1,4 +1,4 @@
-type DataSizeUnit =
+export type DataSizeUnit =
   | 'B'
   | 'KiB'
   | 'MiB'
@@ -33,3 +33,10 @@ type DataSizeUnit =
   | 'Ebit'
   | 'Zbit'
   | 'Ybit';
+
+export type DataSizeUnitSection = 'bit' | 'byte' | 'ibit' | 'ibyte';
+
+export type DataSize = {
+  value: string;
+  unit: DataSizeUnit;
+};

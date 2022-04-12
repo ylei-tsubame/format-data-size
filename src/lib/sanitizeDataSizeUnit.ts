@@ -1,9 +1,11 @@
+import { DataSizeUnit } from '../types';
+
 import { UNITS } from '../consts';
 
 export const sanitizeDataSizeUnit = (
   unit: DataSizeUnit,
   fallbackUnit: DataSizeUnit,
-  units: DataSizeUnit[] = UNITS,
+  units: Readonly<DataSizeUnit[]> = UNITS,
 ): {
   unit: DataSizeUnit;
   unitIndex: number;

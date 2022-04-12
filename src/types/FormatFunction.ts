@@ -1,10 +1,10 @@
-type FormatOptions = {
+export type FormatOptions = {
   bigintFormatOptions?: BigIntToLocaleStringOptions;
   numberFormatOptions?: Intl.NumberFormatOptions;
   locale?: boolean | string;
 };
 
-type FormatFunction = (
+export type FormatFunction = (
   stringInt: string,
   postDecimalIndex: number,
   options?: FormatOptions,

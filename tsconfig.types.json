@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "declarationMap": true,
     "emitDeclarationOnly": true,
-    "outDir": "dist/types"
+    "incremental": false,
+    "isolatedModules": false,
+    "outFile": "./types/index.d.ts"
   },
   "extends": "./tsconfig.json"
 }

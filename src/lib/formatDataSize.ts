@@ -1,4 +1,10 @@
 import {
+  FormatDataSizeFunction,
+  FormatDataSizeInputValue,
+  FormatDataSizeOptions,
+} from '../types';
+
+import {
   adjustPrecision,
   convert,
   format,
@@ -7,7 +13,7 @@ import {
 } from '.';
 
 export const formatDataSize: FormatDataSizeFunction = (
-  value: DataSizeValue | string,
+  value: FormatDataSizeInputValue,
   { fromUnit = 'B', locale, precision = 2, toUnit }: FormatDataSizeOptions = {},
 ) => {
   const valueParts = value.toString().split(/\D/, 2);

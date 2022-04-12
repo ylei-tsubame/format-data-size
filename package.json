@@ -2,7 +2,7 @@
   "name": "format-data-size",
   "version": "0.1.0",
   "description": "NPM module for converting and formatting data sizes.",
-  "main": "./dist/nodejs-cjs/index.js",
+  "main": "./dist/nodejs-cjs/index.cjs",
   "scripts": {
     "build": "rollup --config rollup.config.mjs",
     "build:dev": "tsc --project tsconfig.dev.json",
@@ -30,17 +30,18 @@
   "homepage": "https://github.com/ylei-tsubame/format-data-size#readme",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "types"
   ],
   "exports": {
     ".": {
       "node": {
-        "import": "./dist/nodejs-esm/index.js",
-        "require": "./dist/nodejs-cjs/index.js"
-      },
-      "default": "./dist/nodejs-cjs/index.js"
+        "import": "./dist/nodejs-esm/index.mjs",
+        "require": "./dist/nodejs-cjs/index.cjs"
+      }
     }
   },
+  "types": "./types/index.d.ts",
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",

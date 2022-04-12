@@ -1,7 +1,9 @@
+import { FormatDataSizeInputValue, FormatDataSizeOptions } from '../types';
+
 import { formatDataSize } from '.';
 
 export const formatDataSizeToString = (
-  ...args: Parameters<FormatDataSizeFunction>
+  ...args: [FormatDataSizeInputValue, FormatDataSizeOptions]
 ) => {
   const result = formatDataSize(...args);
 

@@ -3,5 +3,6 @@ node_modules/
 
 # generated outputs
 coverage/
-dev/
-dist/
+/dev/
+/dist/
+/types/

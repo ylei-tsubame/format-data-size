@@ -1,9 +1,11 @@
-type ConvertOptions = {
+import { DataSizeUnit } from '.';
+
+export type ConvertOptions = {
   isReverse?: boolean;
   precision?: number;
 };
 
-type ConvertFunction = (
+export type ConvertFunction = (
   value: bigint,
   unit: DataSizeUnit,
   options?: ConvertOptions,

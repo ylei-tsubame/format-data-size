@@ -1,3 +1,9 @@
+import {
+  CreateConversionTableFunction,
+  CreateConversionTableOptions,
+  DataSizeUnit,
+} from '../types';
+
 import { UNIT_SECTION_LENGTH, UNITS } from '../consts';
 
 import { power } from '.';

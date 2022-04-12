@@ -103,5 +103,6 @@ typings/
 .tern-port
 
 # generated outputs
-dev/
-dist/
+/dev/
+/dist/
+/types/

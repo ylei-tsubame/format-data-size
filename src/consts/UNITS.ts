@@ -1,3 +1,5 @@
+import { DataSizeUnit } from '../types';
+
 // Don't forget to change the unit sections (and unit section length if applicable) when changing the unit list.
 export const UNITS: Readonly<DataSizeUnit[]> = [
   'B',

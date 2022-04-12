@@ -1,6 +1,6 @@
-type RoundOptions = { precision?: number };
+export type RoundOptions = { precision?: number };
 
-type RoundFunction = (
+export type RoundFunction = (
   stringInt: string,
   fractionIndex: number,
   options?: RoundOptions,

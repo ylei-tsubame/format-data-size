@@ -1,3 +1,5 @@
+import { FormatFunction, FormatOptions } from '../types';
+
 export const format: FormatFunction = (
   stringInt: string,
   postDecimalIndex: number,
