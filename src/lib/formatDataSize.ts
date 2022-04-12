@@ -1,41 +1,50 @@
-import { UNITS } from '../consts';
-
-import { adjustPrecision, convert, format } from '.';
+import {
+  adjustPrecision,
+  convert,
+  format,
+  sanitizeDataSizeUnit,
+  selectDataSizeUnit,
+} from '.';
 
 export const formatDataSize: FormatDataSizeFunction = (
   value: DataSizeValue | string,
   { fromUnit = 'B', locale, precision = 2, toUnit }: FormatDataSizeOptions = {},
 ) => {
-  console.log(`value=${value}, fromUnit=${fromUnit}, toUnit=${toUnit}`);
+  console.log(`value=${value},fromUnit=${fromUnit},toUnit=${toUnit}`);
 
   const valueParts = value.toString().split(/\D/, 2);
   const valuePrecision = valueParts[1] ? valueParts[1].length : 0;
+  const valueString = valueParts.join('');
 
-  console.log(`valueParts=${valueParts}, valuePrecision=${valuePrecision}`);
+  console.log(`valueParts=${valueParts},valuePrecision=${valuePrecision}`);
 
   let resultValue: bigint;
-  let resultFraction = 0n;
-  let resultUnit: DataSizeUnit;
+  let resultFraction = '';
 
   try {
-    resultValue = BigInt(valueParts.join(''));
+    resultValue = BigInt(valueString);
   } catch (error) {
     return undefined;
   }
 
-  [resultValue] = convert(resultValue, fromUnit, { isReverse: true });
+  const { unit: sanitizedFromUnit, unitIndex: fromUnitIndex } =
+    sanitizeDataSizeUnit(fromUnit, 'B');
 
-  console.log(`resultValue=${resultValue}:${typeof resultValue}`);
-
-  if (toUnit) {
-    resultUnit = toUnit;
-  } else {
-    const autoUnitIndex = Math.ceil(valueParts[0].length / 3) - 1;
-
-    resultUnit = UNITS[autoUnitIndex];
-  }
+  const resultUnit = selectDataSizeUnit(
+    valueString,
+    valuePrecision,
+    sanitizedFromUnit,
+    fromUnitIndex,
+    {
+      toUnit,
+    },
+  );
 
   console.log(`resultUnit=${resultUnit}:${typeof resultUnit}`);
+
+  [resultValue] = convert(resultValue, sanitizedFromUnit, { isReverse: true });
+
+  console.log(`resultValue=${resultValue}:${typeof resultValue}`);
 
   [resultValue, resultFraction] = convert(resultValue, resultUnit, {
     precision: typeof precision === 'number' ? precision : precision?.max,
@@ -45,15 +54,16 @@ export const formatDataSize: FormatDataSizeFunction = (
   console.log(`resultFraction=${resultFraction}:${typeof resultFraction}`);
 
   const resultValueString = resultValue.toString();
-  const splitIndex = resultValueString.length - valuePrecision;
+  let fractionIndex = resultValueString.length - valuePrecision;
+  let resultString;
 
-  let resultString = adjustPrecision(
+  ({ stringInt: resultString, fractionIndex } = adjustPrecision(
     `${resultValueString}${resultFraction}`,
-    splitIndex,
+    fractionIndex,
     precision,
-  );
+  ));
 
-  resultString = format(resultString, splitIndex, { locale });
+  resultString = format(resultString, fractionIndex, { locale });
 
   console.log(`resultString=${resultString}:${typeof resultString}`);
 

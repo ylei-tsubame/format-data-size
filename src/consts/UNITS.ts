@@ -1,4 +1,6 @@
+// Don't forget to change the unit sections when changing the unit list.
 export const UNITS: DataSizeUnit[] = [
+  'B',
   'kB',
   'MB',
   'GB',
@@ -7,6 +9,7 @@ export const UNITS: DataSizeUnit[] = [
   'EB',
   'ZB',
   'YB',
+  'B',
   'KiB',
   'MiB',
   'GiB',
@@ -15,6 +18,7 @@ export const UNITS: DataSizeUnit[] = [
   'EiB',
   'ZiB',
   'YiB',
+  'b',
   'kbit',
   'Mbit',
   'Gbit',
@@ -23,6 +27,7 @@ export const UNITS: DataSizeUnit[] = [
   'Ebit',
   'Zbit',
   'Ybit',
+  'b',
   'Kibit',
   'Mibit',
   'Gibit',
@@ -31,6 +36,4 @@ export const UNITS: DataSizeUnit[] = [
   'Eibit',
   'Zibit',
   'Yibit',
-  'B',
-  'b',
 ];
