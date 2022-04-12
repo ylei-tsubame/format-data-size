@@ -14,8 +14,6 @@ export const convert: ConvertFunction = (
   const convertKey = `b-${unit}`;
   const convertMultiplier: bigint | undefined = conversionTable[convertKey];
 
-  console.log(`key=${convertKey},multiplier=${convertMultiplier}`);
-
   if (!convertMultiplier) {
     return unchangedValue;
   }
@@ -27,8 +25,6 @@ export const convert: ConvertFunction = (
   // Increase precision to ensure correct rounding.
   const shiftMultiplier = BigInt('1'.padEnd(maxDividePrecision + 2, '0'));
   const divided = (value * shiftMultiplier) / convertMultiplier;
-
-  console.log(`shiftMultiplier=${shiftMultiplier},divided=${divided}`);
 
   return [
     divided / shiftMultiplier,

@@ -10,13 +10,9 @@ export const formatDataSize: FormatDataSizeFunction = (
   value: DataSizeValue | string,
   { fromUnit = 'B', locale, precision = 2, toUnit }: FormatDataSizeOptions = {},
 ) => {
-  console.log(`value=${value},fromUnit=${fromUnit},toUnit=${toUnit}`);
-
   const valueParts = value.toString().split(/\D/, 2);
   const valuePrecision = valueParts[1] ? valueParts[1].length : 0;
   const valueString = valueParts.join('');
-
-  console.log(`valueParts=${valueParts},valuePrecision=${valuePrecision}`);
 
   let resultValue: bigint;
   let resultFraction = '';
@@ -44,18 +40,11 @@ export const formatDataSize: FormatDataSizeFunction = (
     },
   );
 
-  console.log(`resultUnit=${resultUnit}:${typeof resultUnit}`);
-
   [resultValue] = convert(resultValue, sanitizedFromUnit, { isReverse: true });
-
-  console.log(`resultValue=${resultValue}:${typeof resultValue}`);
 
   [resultValue, resultFraction] = convert(resultValue, resultUnit, {
     precision: typeof precision === 'number' ? precision : precision?.max,
   });
-
-  console.log(`resultValue=${resultValue}:${typeof resultValue}`);
-  console.log(`resultFraction=${resultFraction}:${typeof resultFraction}`);
 
   const resultValueString = resultValue.toString();
   let fractionIndex = resultValueString.length - valuePrecision;
@@ -68,8 +57,6 @@ export const formatDataSize: FormatDataSizeFunction = (
   ));
 
   resultString = format(resultString, fractionIndex, { locale });
-
-  console.log(`resultString=${resultString}:${typeof resultString}`);
 
   return {
     value: resultString,

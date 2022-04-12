@@ -33,7 +33,5 @@ export const createConversionTable: CreateConversionTableFunction = ({
     existingTable[convertKey] = multiplier;
   }
 
-  console.dir(existingTable, { depth: null });
-
   return existingTable;
 };

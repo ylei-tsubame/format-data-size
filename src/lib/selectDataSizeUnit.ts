@@ -33,11 +33,6 @@ export const selectDataSizeUnit: SelectDataSizeUnitFunction = (
   const integralLength = stringInt.length - precision;
   const unitLevel = fromUnitIndex % unitSectionLength;
   const levelOffset = Math.floor((integralLength - precision) / 3);
-
-  console.log(
-    `stringInt=${stringInt},integralLength=${integralLength},precision=${precision},unitLevel=${unitLevel},levelOffset=${levelOffset}`,
-  );
-
   const indexInSection = Math.max(
     0,
     Math.min(unitLevel + levelOffset, unitSectionLength - 1),
