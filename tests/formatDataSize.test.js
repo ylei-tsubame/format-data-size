@@ -42,7 +42,7 @@ describe(`unit ${typeof formatDataSize} ${formatDataSize.name}`, () => {
   });
 
   it('formats by auto-detecting the most approprate target unit', () => {
-    expect.assertions(6);
+    expect.assertions(7);
 
     expect(formatDataSize(123098.456, { fromUnit: 'kB' })).toStrictEqual({
       value: '123.10',
@@ -74,6 +74,11 @@ describe(`unit ${typeof formatDataSize} ${formatDataSize.name}`, () => {
     expect(formatDataSize(11111, { fromUnit: 'YB' })).toStrictEqual({
       value: '11111.00',
       unit: 'YB',
+    });
+
+    expect(formatDataSize(1234.567, { toUnit: 'ibit' })).toStrictEqual({
+      value: '9.65',
+      unit: 'Kibit',
     });
   });
 
