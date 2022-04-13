@@ -1,5 +1,6 @@
 import { babel } from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import ts from 'rollup-plugin-ts';
 
 const createConfig = (babelEnvName, format, name = 'formatDataSize') => {
   const isBrowser = babelEnvName === 'browser';
@@ -33,4 +34,11 @@ export default [
   createConfig('browser', 'umd'),
   createConfig('nodejs', 'esm'),
   createConfig('nodejs', 'cjs'),
+  {
+    input: 'src/index.ts',
+    output: {
+      file: 'types/index.d.ts',
+    },
+    plugins: [ts({ tsconfig: './tsconfig.types.json' })],
+  },
 ];
