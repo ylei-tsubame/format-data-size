@@ -1,6 +1,12 @@
-import { DataSizeUnit, DataSizeUnitSection, TargetDataSizeUnit } from '.';
+import {
+  ConversionTable,
+  DataSizeUnit,
+  DataSizeUnitSection,
+  TargetDataSizeUnit,
+} from '.';
 
 export type SelectDataSizeUnitOptions = {
+  conversionTable?: ConversionTable;
   toUnit?: TargetDataSizeUnit;
   units?: Readonly<DataSizeUnit[]>;
   unitSections?: Readonly<DataSizeUnitSection[]>;
@@ -8,9 +14,7 @@ export type SelectDataSizeUnitOptions = {
 };
 
 export type SelectDataSizeUnitFunction = (
-  stringInt: string,
-  postDecimalIndex: number,
+  valueInBits: bigint,
   fromUnit: DataSizeUnit,
-  fromUnitIndex: number,
   options?: SelectDataSizeUnitOptions,
 ) => DataSizeUnit;

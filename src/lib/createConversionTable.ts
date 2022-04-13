@@ -18,25 +18,23 @@ export const createConversionTable: CreateConversionTableFunction = ({
 
   for (let targetIndex = 0; targetIndex < units.length; targetIndex += 1) {
     const targetUnit = units[targetIndex];
-
-    if (bit === targetUnit) {
-      continue;
-    }
-
     const convertKey = `${bit}-${targetUnit}`;
-    const isTargetBinary = targetUnit[1] === 'i';
-    const isTargetByte = /B$/.test(targetUnit);
-    const exponent = targetIndex % unitSectionLength;
 
-    const base = isTargetBinary ? 1024n : 1000n;
+    if (existingTable[convertKey] === undefined) {
+      const isTargetBinary = targetUnit[1] === 'i';
+      const isTargetByte = /B$/.test(targetUnit);
+      const exponent = targetIndex % unitSectionLength;
 
-    let multiplier: bigint = power(base, exponent);
+      const base = isTargetBinary ? 1024n : 1000n;
 
-    if (isTargetByte) {
-      multiplier *= bitsInByte;
+      let multiplier: bigint = power(base, exponent);
+
+      if (isTargetByte) {
+        multiplier *= bitsInByte;
+      }
+
+      existingTable[convertKey] = multiplier;
     }
-
-    existingTable[convertKey] = multiplier;
   }
 
   return existingTable;

@@ -33,20 +33,17 @@ export const formatDataSize: FormatDataSizeFunction = (
     return undefined;
   }
 
-  const { unit: sanitizedFromUnit, unitIndex: fromUnitIndex } =
-    sanitizeDataSizeUnit(fromUnit, 'B');
+  const { unit: sanitizedFromUnit } = sanitizeDataSizeUnit(fromUnit, 'B');
+
+  [resultValue] = convert(resultValue, sanitizedFromUnit, { isReverse: true });
 
   const resultUnit = selectDataSizeUnit(
-    valueString,
-    valuePrecision,
+    resultValue / BigInt(10 ** valuePrecision),
     sanitizedFromUnit,
-    fromUnitIndex,
     {
       toUnit,
     },
   );
-
-  [resultValue] = convert(resultValue, sanitizedFromUnit, { isReverse: true });
 
   [resultValue, resultFraction] = convert(resultValue, resultUnit, {
     precision: typeof precision === 'number' ? precision : precision?.max,
