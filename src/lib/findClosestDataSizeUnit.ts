@@ -13,9 +13,13 @@ export const findClosestDataSizeUnit = (
   let newToUnit = fromUnit;
 
   if (toUnitSectionIndex < 0) {
-    toUnitSectionIndex = /B$/.test(fromUnit)
-      ? unitSections.indexOf('byte')
-      : unitSections.indexOf('bit');
+    const isBinary = fromUnit[1] === 'i';
+    const isByte = /B$/.test(fromUnit);
+
+    toUnitSectionIndex = unitSections.findIndex(
+      (section) =>
+        section === `${isBinary ? 'i' : ''}${isByte ? 'byte' : 'bit'}`,
+    );
   }
 
   let searchIndex = toUnitSectionIndex * unitSectionLength;
