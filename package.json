@@ -4,9 +4,9 @@
   "description": "NPM module for converting and formatting data sizes.",
   "scripts": {
     "build": "rollup --config rollup.config.mjs",
-    "build:dev": "tsc --project tsconfig.dev.json",
     "config:babel": "node ./scripts/printConfig.js './babel.config.js'",
     "config:rollup": "node ./scripts/printConfig.js './rollup.config.mjs'",
+    "dev": "tsc --project tsconfig.dev.json --watch",
     "eslint:base": "eslint --ext cjs,js,mjs,ts --max-warnings 0",
     "eslint:all": "npm run eslint:base -- .",
     "lint": "npm run eslint:all && npm run prettier:all -- --check",
