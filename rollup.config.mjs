@@ -1,5 +1,6 @@
 import { babel } from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import shebang from 'rollup-plugin-add-shebang';
 import ts from 'rollup-plugin-ts';
 
 const createConfig = (babelEnvName, format, name = 'formatDataSize') => {
@@ -34,6 +35,18 @@ export default [
   createConfig('browser', 'umd'),
   createConfig('nodejs', 'esm'),
   createConfig('nodejs', 'cjs'),
+  {
+    input: 'src/cli.ts',
+    output: {
+      file: 'dist/cli.js',
+      format: 'cjs',
+    },
+    plugins: [
+      nodeResolve({ extensions: ['.ts'] }),
+      babel({ envName: 'nodejs', extensions: ['.ts'] }),
+      shebang({ include: 'dist/cli.js' }),
+    ],
+  },
   {
     input: 'src/index.ts',
     output: {
