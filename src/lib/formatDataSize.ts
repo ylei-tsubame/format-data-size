@@ -9,6 +9,7 @@ import {
   convert,
   format,
   sanitizeDataSizeUnit,
+  sanitizeInputValue,
   selectDataSizeUnit,
 } from '.';
 
@@ -16,7 +17,9 @@ export const formatDataSize: FormatDataSizeFunction = (
   value: FormatDataSizeInputValue,
   { fromUnit = 'B', locale, precision = 2, toUnit }: FormatDataSizeOptions = {},
 ) => {
-  const valueParts = value.toString().split(/\D/, 2);
+  const sanitizedValue = sanitizeInputValue(value);
+
+  const valueParts = sanitizedValue.split(/\D/, 2);
   const valuePrecision = valueParts[1] ? valueParts[1].length : 0;
   const valueString = valueParts.join('');
 
