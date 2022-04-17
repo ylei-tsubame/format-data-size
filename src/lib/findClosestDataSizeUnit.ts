@@ -1,5 +1,7 @@
 import { ConversionTable, DataSizeUnit, DataSizeUnitSection } from '../types';
 
+import { getDataSizeUnitSectionFromUnit } from '.';
+
 export const findClosestDataSizeUnit = (
   valueInBits: bigint,
   fromUnit: DataSizeUnit,
@@ -13,13 +15,10 @@ export const findClosestDataSizeUnit = (
   let newToUnit = fromUnit;
 
   if (toUnitSectionIndex < 0) {
-    const isBinary = fromUnit[1] === 'i';
-    const isByte = /B$/.test(fromUnit);
-
-    toUnitSectionIndex = unitSections.findIndex(
-      (section) =>
-        section === `${isBinary ? 'i' : ''}${isByte ? 'byte' : 'bit'}`,
-    );
+    toUnitSectionIndex = getDataSizeUnitSectionFromUnit(
+      fromUnit,
+      unitSections,
+    ).index;
   }
 
   let searchIndex = toUnitSectionIndex * unitSectionLength;
