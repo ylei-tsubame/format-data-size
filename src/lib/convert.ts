@@ -1,6 +1,6 @@
 import { ConvertFunction, ConvertOptions, DataSizeUnit } from '../types';
 
-import { conversionTable } from '../singletons';
+import { CONVERSION_TABLE } from '../consts';
 
 export const convert: ConvertFunction = (
   value: bigint,
@@ -14,14 +14,14 @@ export const convert: ConvertFunction = (
   }
 
   const convertKey = `b-${unit}`;
-  const convertMultiplier: bigint | undefined = conversionTable[convertKey];
+  const convertMultiplier: bigint | undefined = CONVERSION_TABLE[convertKey];
 
   if (!convertMultiplier) {
     return unchangedValue;
   }
 
   if (isReverse) {
-    return [value * conversionTable[convertKey], ''];
+    return [value * CONVERSION_TABLE[convertKey], ''];
   }
 
   // Increase precision to ensure correct rounding.

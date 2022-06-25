@@ -6,6 +6,7 @@
     "build": "rollup --config rollup.config.mjs",
     "config:babel": "node ./scripts/printConfig.js './babel.config.js'",
     "config:rollup": "node ./scripts/printConfig.js './rollup.config.mjs'",
+    "ctable": "tsc --project tsconfig.dev.json && node ./dev/printConversionTable.js",
     "dev": "tsc --project tsconfig.dev.json --watch",
     "eslint:base": "eslint --ext cjs,js,mjs,ts --max-warnings 0",
     "eslint:all": "npm run eslint:base -- .",

@@ -5,9 +5,12 @@ import {
   SelectDataSizeUnitOptions,
 } from '../types';
 
-import { UNITS, UNIT_SECTIONS, UNIT_SECTION_LENGTH } from '../consts';
-
-import { conversionTable as cTable } from '../singletons';
+import {
+  CONVERSION_TABLE,
+  UNITS,
+  UNIT_SECTIONS,
+  UNIT_SECTION_LENGTH,
+} from '../consts';
 
 import { findClosestDataSizeUnit } from '.';
 
@@ -15,7 +18,7 @@ export const selectDataSizeUnit: SelectDataSizeUnitFunction = (
   valueInBits: bigint,
   fromUnit: DataSizeUnit,
   {
-    conversionTable = cTable,
+    conversionTable = CONVERSION_TABLE,
     toUnit,
     units = UNITS,
     unitSections = UNIT_SECTIONS,
