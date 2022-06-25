@@ -87,6 +87,29 @@ describe(`unit ${typeof formatDataSize} ${formatDataSize.name}`, () => {
     });
   });
 
+  it('converts to specified locale correctly', () => {
+    expect.assertions(2);
+
+    expect(
+      formatDataSize(1, {
+        fromUnit: 'MB',
+        locale: 'de',
+        precision: 4,
+        toUnit: 'GB',
+      })
+    ).toStrictEqual({
+      value: '0,0010',
+      unit: 'GB',
+    });
+
+    expect(
+      formatDataSize(38475.0029, { fromUnit: 'GiB', locale: 'ar' })
+    ).toStrictEqual({
+      value: '٣٧٫٥٧',
+      unit: 'TiB',
+    });
+  });
+
   it('handles invalid inputs', () => {
     expect.assertions(2);
 

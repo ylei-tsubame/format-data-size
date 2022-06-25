@@ -6,6 +6,6 @@ export type FormatOptions = {
 
 export type FormatFunction = (
   stringInt: string,
-  postDecimalIndex: number,
+  fractionIndex: number,
   options?: FormatOptions,
 ) => string;
