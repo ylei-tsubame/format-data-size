@@ -1,35 +1,41 @@
-import { ConvertFunction, ConvertOptions, DataSizeUnit } from '../types';
+import {
+  BigFloat,
+  ConversionTable,
+  ConvertFunction,
+  ConvertOptions,
+  DataSizeUnit,
+} from '../types';
 
 import { CONVERSION_TABLE } from '../consts';
 
 export const convert: ConvertFunction = (
-  value: bigint,
+  { precision, value }: BigFloat,
   unit: DataSizeUnit,
-  { isReverse, precision: maxDividePrecision = 6 }: ConvertOptions = {},
+  { isReverse }: ConvertOptions = {},
 ) => {
-  const unchangedValue: [bigint, string] = [value, ''];
-
   if (unit === 'b') {
-    return unchangedValue;
+    return { precision, value };
   }
 
-  const convertKey = `b-${unit}`;
-  const convertMultiplier: bigint | undefined = CONVERSION_TABLE[convertKey];
-
-  if (!convertMultiplier) {
-    return unchangedValue;
-  }
+  const convertKey: keyof Readonly<ConversionTable> = `b-${unit}`;
+  const convertMultiplier: bigint = CONVERSION_TABLE[convertKey];
 
   if (isReverse) {
-    return [value * CONVERSION_TABLE[convertKey], ''];
+    return {
+      precision,
+      value: value * convertMultiplier,
+    };
   }
 
   // Increase precision to ensure correct rounding.
-  const shiftMultiplier = BigInt('1'.padEnd(maxDividePrecision + 2, '0'));
-  const divided = (value * shiftMultiplier) / convertMultiplier;
+  // TODO: record the convert multiplier length in the conversion table because
+  // it's constant.
+  const shift = String(convertMultiplier).length;
+  const shiftMultiplier = BigInt(10 ** shift);
+  const converted = (value * shiftMultiplier) / convertMultiplier;
 
-  return [
-    divided / shiftMultiplier,
-    `${divided % shiftMultiplier}`.padStart(maxDividePrecision + 1, '0'),
-  ];
+  return {
+    precision: precision + shift,
+    value: converted,
+  };
 };

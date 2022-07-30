@@ -1,12 +1,11 @@
-import { DataSizeUnit } from '.';
+import { BigFloat, DataSizeUnit } from '.';
 
 export type ConvertOptions = {
   isReverse?: boolean;
-  precision?: number;
 };
 
 export type ConvertFunction = (
-  value: bigint,
+  value: BigFloat,
   unit: DataSizeUnit,
   options?: ConvertOptions,
-) => [bigint, string];
+) => BigFloat;
