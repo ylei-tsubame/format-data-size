@@ -1,21 +1,16 @@
-export const sanitizeInputValue = (value: unknown, fallbackValue = '0') => {
-  const valueType = typeof value;
+import { BigFloat } from '../types';
 
-  let knownValue: string = fallbackValue;
+export const sanitizeInputValue = (value: unknown): BigFloat => {
+  const valueParts = String(value).split(/\D/, 2);
+  const valueFractionLength = valueParts[1]?.length ?? 0;
+  const valueString = valueParts.join('');
 
-  switch (valueType) {
-    case 'number':
-      knownValue = (value as number).toString();
-      break;
-    case 'bigint':
-      knownValue = (value as bigint).toString();
-      break;
-    case 'string':
-      knownValue = value as string;
-      break;
-    default:
-      throw Error(`Unexpected input value; value=${value}, type=${valueType}.`);
+  if (valueString.length === 0) {
+    throw Error('Value is blank.');
   }
 
-  return knownValue;
+  return {
+    value: BigInt(valueString),
+    precision: valueFractionLength,
+  };
 };
