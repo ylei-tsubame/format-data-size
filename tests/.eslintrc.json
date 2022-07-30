@@ -1,5 +1,10 @@
 {
   "env": { "jest": true },
   "extends": ["../.eslintrc.json", "plugin:jest/all"],
+  "parserOptions": {
+    "ecmaFeatures": { "impliedStrict": true },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
   "plugins": ["jest"]
 }
