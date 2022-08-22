@@ -19,4 +19,23 @@ describe(`unit ${typeof convert} ${convert.name}`, () => {
       value: 1120939508n,
     });
   });
+
+  it('reverse converts given value to the target unit correctly', () => {
+    expect.assertions(3);
+
+    const reverse = { isReverse: true };
+
+    expect(convert({ precision: 8, value: 4n }, 'B', reverse)).toStrictEqual({
+      precision: 8,
+      value: 32n,
+    });
+
+    expect(
+      convert({ precision: 2, value: 3421n }, 'GiB', reverse)
+    ).toStrictEqual({ precision: 2, value: 29386166239232n });
+
+    expect(convert({ precision: 1, value: 25n }, 'KiB', reverse)).toStrictEqual(
+      { precision: 1, value: 204800n }
+    );
+  });
 });
