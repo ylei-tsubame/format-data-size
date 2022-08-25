@@ -1,10 +1,8 @@
-export type RoundOptions = { precision?: number };
+import { BigFloat } from './BigFloat';
+
+export type RoundOptions = { toPrecision?: number };
 
 export type RoundFunction = (
-  stringInt: string,
-  fractionIndex: number,
+  value: BigFloat,
   options?: RoundOptions,
-) => {
-  stringInt: string;
-  fractionIndex: number;
-};
+) => BigFloat;

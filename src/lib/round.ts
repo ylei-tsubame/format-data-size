@@ -1,48 +1,24 @@
-import { RoundFunction, RoundOptions } from '../types';
-
-import { charToInt } from '.';
+import { BigFloat, RoundFunction, RoundOptions } from '../types';
 
 export const round: RoundFunction = (
-  stringInt: string,
-  fractionIndex: number,
-  { precision = 0 }: RoundOptions = {},
+  { precision, value }: BigFloat,
+  { toPrecision = 0 }: RoundOptions = {},
 ) => {
-  const lastDigitIndex = fractionIndex + precision;
-  const stringValue = stringInt.padEnd(
-    Math.max(lastDigitIndex, stringInt.length - 1) + 1,
-    '0',
-  );
+  const result: BigFloat = { precision: toPrecision, value };
 
-  const lastDigit = charToInt(stringValue, lastDigitIndex);
+  if (toPrecision > precision) {
+    result.value *= BigInt(10 ** (toPrecision - precision));
+  } else if (toPrecision < precision) {
+    const diff = precision - toPrecision;
+    const b = BigInt(10 ** diff);
+    const last = (result.value % b) / BigInt(10 ** (diff - 1));
 
-  let carryOver = lastDigit > 4 ? 1 : 0;
-  let digitIndex = lastDigitIndex - 1;
-  let roundedPart = '';
-  let newFractionIndex = fractionIndex;
+    result.value /= b;
 
-  while (carryOver === 1) {
-    const added = charToInt(stringValue, digitIndex) + carryOver;
-
-    carryOver = Math.floor(added / 10);
-    roundedPart = `${added % 10}${roundedPart}`;
-    digitIndex -= 1;
+    if (last > 4) {
+      result.value += 1n;
+    }
   }
 
-  const unchangedPart = stringValue.substring(0, digitIndex + 1);
-
-  let newStringInt = `${unchangedPart}${roundedPart}`;
-
-  if (newStringInt === '') {
-    newStringInt = '0';
-    newFractionIndex = 1;
-  }
-
-  if (digitIndex < -1) {
-    newFractionIndex += 1;
-  }
-
-  return {
-    stringInt: newStringInt,
-    fractionIndex: newFractionIndex,
-  };
+  return result;
 };
