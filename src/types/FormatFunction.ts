@@ -1,3 +1,5 @@
+import { BigFloat } from './BigFloat';
+
 export type FormatOptions = {
   bigintFormatOptions?: BigIntToLocaleStringOptions;
   numberFormatOptions?: Intl.NumberFormatOptions;
@@ -5,7 +7,6 @@ export type FormatOptions = {
 };
 
 export type FormatFunction = (
-  stringInt: string,
-  fractionIndex: number,
+  value: BigFloat,
   options?: FormatOptions,
 ) => string;
