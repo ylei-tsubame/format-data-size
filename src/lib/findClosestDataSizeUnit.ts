@@ -1,6 +1,6 @@
 import { ConversionTable, DataSizeUnit, DataSizeUnitSection } from '../types';
 
-import { getDataSizeUnitSectionFromUnit } from '.';
+import { getDataSizeUnitSectionFromUnit } from './getDataSizeUnitSectionFromUnit';
 
 export const findClosestDataSizeUnit = (
   valueInBits: bigint,
