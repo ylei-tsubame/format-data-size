@@ -1,5 +1,6 @@
 export * from './adjustPrecision';
 export * from './charToInt';
+export * from './clamp';
 export * from './convert';
 export * from './createConversionTable';
 export * from './findClosestDataSizeUnit';
