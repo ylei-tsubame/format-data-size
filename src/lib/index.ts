@@ -12,4 +12,5 @@ export * from './power';
 export * from './round';
 export * from './sanitizeDataSizeUnit';
 export * from './sanitizeInputValue';
+export * from './sanitizePrecision';
 export * from './selectDataSizeUnit';
