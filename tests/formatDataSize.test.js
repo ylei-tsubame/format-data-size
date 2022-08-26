@@ -5,7 +5,7 @@ describe(`unit ${typeof formatDataSize} ${formatDataSize.name}`, () => {
     expect.assertions(1);
 
     expect(formatDataSize(1024, { toUnit: 'b' })).toStrictEqual({
-      value: '8192.00',
+      value: '8192',
       unit: 'b',
     });
   });
@@ -36,7 +36,7 @@ describe(`unit ${typeof formatDataSize} ${formatDataSize.name}`, () => {
     expect(
       formatDataSize(0.001, { fromUnit: 'TB', toUnit: 'GB' })
     ).toStrictEqual({
-      value: '1.00',
+      value: '1',
       unit: 'GB',
     });
   });
@@ -45,34 +45,34 @@ describe(`unit ${typeof formatDataSize} ${formatDataSize.name}`, () => {
     expect.assertions(8);
 
     expect(formatDataSize(123098.456, { fromUnit: 'kB' })).toStrictEqual({
-      value: '123.10',
+      value: '123.1',
       unit: 'MB',
     });
 
     expect(formatDataSize(0.00034, { fromUnit: 'TB' })).toStrictEqual({
-      value: '340.00',
+      value: '340',
       unit: 'MB',
     });
 
     expect(formatDataSize(12)).toStrictEqual({
-      value: '12.00',
+      value: '12',
       unit: 'B',
     });
 
     expect(formatDataSize(8000, { fromUnit: 'b' })).toStrictEqual({
-      value: '8.00',
+      value: '8',
       unit: 'kbit',
     });
 
     expect(
       formatDataSize(8192, { fromUnit: 'Gibit', toUnit: 'byte' })
     ).toStrictEqual({
-      value: '1.10',
+      value: '1.1',
       unit: 'TB',
     });
 
     expect(formatDataSize(11111, { fromUnit: 'YB' })).toStrictEqual({
-      value: '11111.00',
+      value: '11111',
       unit: 'YB',
     });
 

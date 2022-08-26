@@ -6,7 +6,7 @@ import {
 
 import { UNIT_SECTION_LENGTH, UNITS } from '../consts';
 
-import { power } from '.';
+import { power } from './power';
 
 export const createConversionTable: CreateConversionTableFunction = ({
   units = UNITS,

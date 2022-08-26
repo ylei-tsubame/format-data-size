@@ -1,5 +1,7 @@
 import { BigFloat, RoundFunction, RoundOptions } from '../types';
 
+import { p10n } from './p10n';
+
 export const round: RoundFunction = (
   { precision, value }: BigFloat,
   { toPrecision = 0 }: RoundOptions = {},
@@ -7,13 +9,13 @@ export const round: RoundFunction = (
   const result: BigFloat = { precision: toPrecision, value };
 
   if (toPrecision > precision) {
-    result.value *= BigInt(10 ** (toPrecision - precision));
+    result.value *= p10n(toPrecision - precision);
   } else if (toPrecision < precision) {
     const diff = precision - toPrecision;
-    const b = BigInt(10 ** diff);
-    const last = (result.value % b) / BigInt(10 ** (diff - 1));
+    const mask = p10n(diff);
+    const last = (result.value % mask) / p10n(diff - 1);
 
-    result.value /= b;
+    result.value /= mask;
 
     if (last > 4) {
       result.value += 1n;

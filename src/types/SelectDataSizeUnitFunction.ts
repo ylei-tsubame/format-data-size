@@ -1,4 +1,5 @@
 import {
+  BigFloat,
   ConversionTable,
   DataSizeUnit,
   DataSizeUnitSection,
@@ -14,7 +15,7 @@ export type SelectDataSizeUnitOptions = {
 };
 
 export type SelectDataSizeUnitFunction = (
-  valueInBits: bigint,
+  value: BigFloat,
   fromUnit: DataSizeUnit,
   options?: SelectDataSizeUnitOptions,
 ) => DataSizeUnit;

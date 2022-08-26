@@ -1,68 +1,50 @@
 import {
+  BigFloat,
   FormatDataSizeFunction,
   FormatDataSizeInputValue,
   FormatDataSizeOptions,
 } from '../types';
 
 import {
-  adjustPrecision,
+  clamp,
   convert,
   format,
+  round,
   sanitizeDataSizeUnit,
   sanitizeInputValue,
+  sanitizePrecision,
   selectDataSizeUnit,
+  trimEnd,
 } from '.';
 
 export const formatDataSize: FormatDataSizeFunction = (
   value: FormatDataSizeInputValue,
-  { fromUnit = 'B', locale, precision = 2, toUnit }: FormatDataSizeOptions = {},
+  { fromUnit = 'B', locale, precision, toUnit }: FormatDataSizeOptions = {},
 ) => {
-  const sanitizedValue = sanitizeInputValue(value);
-
-  const valueParts = sanitizedValue.split(/\D/, 2);
-  const valuePrecision = valueParts[1] ? valueParts[1].length : 0;
-  const valueString = valueParts.join('');
-
-  let resultValue: bigint;
-  let resultFraction = '';
-
-  if (valueString === '') {
-    return undefined;
-  }
+  let result: BigFloat;
 
   try {
-    resultValue = BigInt(valueString);
+    result = sanitizeInputValue(value);
   } catch (error) {
     return undefined;
   }
 
+  const { max: pMax, min: pMin } = sanitizePrecision(precision);
   const { unit: sanitizedFromUnit } = sanitizeDataSizeUnit(fromUnit, 'B');
 
-  [resultValue] = convert(resultValue, sanitizedFromUnit, { isReverse: true });
+  result = convert(result, sanitizedFromUnit, { isReverse: true });
 
-  const resultUnit = selectDataSizeUnit(
-    resultValue / BigInt(10 ** valuePrecision),
-    sanitizedFromUnit,
-    {
-      toUnit,
-    },
-  );
-
-  [resultValue, resultFraction] = convert(resultValue, resultUnit, {
-    precision: typeof precision === 'number' ? precision : precision?.max,
+  const resultUnit = selectDataSizeUnit(result, sanitizedFromUnit, {
+    toUnit,
   });
 
-  const resultValueString = resultValue.toString();
-  let fractionIndex = resultValueString.length - valuePrecision;
-  let resultString;
+  result = convert(result, resultUnit);
+  result = round(result, {
+    toPrecision: clamp(result.precision, pMin, pMax),
+  });
+  result = trimEnd(result, pMin);
 
-  ({ stringInt: resultString, fractionIndex } = adjustPrecision(
-    `${resultValueString}${resultFraction}`,
-    fractionIndex,
-    precision,
-  ));
-
-  resultString = format(resultString, fractionIndex, { locale });
+  const resultString = format(result, { locale });
 
   return {
     value: resultString,

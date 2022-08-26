@@ -1,4 +1,5 @@
 import {
+  BigFloat,
   DataSizeUnit,
   DataSizeUnitSection,
   SelectDataSizeUnitFunction,
@@ -12,10 +13,11 @@ import {
   UNIT_SECTION_LENGTH,
 } from '../consts';
 
-import { findClosestDataSizeUnit } from '.';
+import { findClosestDataSizeUnit } from './findClosestDataSizeUnit';
+import { p10n } from './p10n';
 
 export const selectDataSizeUnit: SelectDataSizeUnitFunction = (
-  valueInBits: bigint,
+  { precision, value }: BigFloat,
   fromUnit: DataSizeUnit,
   {
     conversionTable = CONVERSION_TABLE,
@@ -32,7 +34,7 @@ export const selectDataSizeUnit: SelectDataSizeUnitFunction = (
   }
 
   return findClosestDataSizeUnit(
-    valueInBits,
+    value / p10n(precision),
     fromUnit,
     toUnit as DataSizeUnitSection,
     conversionTable,

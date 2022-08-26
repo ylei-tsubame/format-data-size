@@ -1,4 +1,3 @@
-export * from './AdjustPrecisionFunction';
 export * from './BigFloat';
 export * from './ConversionTable';
 export * from './ConvertFunction';

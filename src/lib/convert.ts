@@ -8,6 +8,8 @@ import {
 
 import { CONVERSION_TABLE } from '../consts';
 
+import { p10n } from './p10n';
+
 export const convert: ConvertFunction = (
   { precision, value }: BigFloat,
   unit: DataSizeUnit,
@@ -31,7 +33,7 @@ export const convert: ConvertFunction = (
   // TODO: record the convert multiplier length in the conversion table because
   // it's constant.
   const shift = String(convertMultiplier).length;
-  const shiftMultiplier = BigInt(10 ** shift);
+  const shiftMultiplier = p10n(shift);
   const converted = (value * shiftMultiplier) / convertMultiplier;
 
   return {
