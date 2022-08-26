@@ -11,3 +11,4 @@ export * from './PrecisionControl';
 export * from './RoundFunction';
 export * from './SelectDataSizeUnitFunction';
 export * from './TargetDataSizeUnit';
+export * from './TrimEndFunction';

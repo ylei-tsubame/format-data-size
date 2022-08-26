@@ -15,3 +15,4 @@ export * from './sanitizeDataSizeUnit';
 export * from './sanitizeInputValue';
 export * from './sanitizePrecision';
 export * from './selectDataSizeUnit';
+export * from './trimEnd';
