@@ -8,6 +8,7 @@ export * from './format';
 export * from './formatDataSize';
 export * from './formatDataSizeToString';
 export * from './getDataSizeUnitSectionFromUnit';
+export * from './p10n';
 export * from './power';
 export * from './round';
 export * from './sanitizeDataSizeUnit';

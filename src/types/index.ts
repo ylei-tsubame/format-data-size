@@ -6,6 +6,7 @@ export * from './CreateConversionTableFunction';
 export * from './DataSize';
 export * from './FormatDataSizeFunction';
 export * from './FormatFunction';
+export * from './P10NFunction';
 export * from './PrecisionControl';
 export * from './RoundFunction';
 export * from './SelectDataSizeUnitFunction';
